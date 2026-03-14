@@ -1,0 +1,16 @@
+# Veritabanı - GitHub'a yükleme
+furnitureflow.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Virtual environment
+venv/
+env/
+.env
+
+# OS dosyaları
+.DS_Store
+Thumbs.db

@@ -38,33 +38,58 @@ DB = "furnitureflow.db"
 
 # ── Font (Türkçe karakter desteği — Windows + Linux/Cloud) ───────────────────
 def _reg_fonts():
-    # 1) Windows
+    # 1) Windows'ta Arial
     win_dir = r"C:\Windows\Fonts"
     if os.path.exists(os.path.join(win_dir, "arial.ttf")):
         try:
-            pdfmetrics.registerFont(TTFont("Arial",      os.path.join(win_dir,"arial.ttf")))
-            pdfmetrics.registerFont(TTFont("Arial-Bold", os.path.join(win_dir,"arialbd.ttf")))
-            return "Arial","Arial-Bold"
+            pdfmetrics.registerFont(TTFont("AppFont",      os.path.join(win_dir,"arial.ttf")))
+            pdfmetrics.registerFont(TTFont("AppFont-Bold", os.path.join(win_dir,"arialbd.ttf")))
+            return "AppFont","AppFont-Bold"
         except: pass
 
-    # 2) Linux/Streamlit Cloud — DejaVu (Ubuntu'da varsayılan olarak kurulu)
-    linux_candidates = [
+    # 2) Proje içindeki fonts/ klasörü (GitHub'a yüklenmiş varsa)
+    local_n = os.path.join(os.path.dirname(__file__), "fonts", "DejaVuSans.ttf")
+    local_b = os.path.join(os.path.dirname(__file__), "fonts", "DejaVuSans-Bold.ttf")
+    if os.path.exists(local_n) and os.path.exists(local_b):
+        try:
+            pdfmetrics.registerFont(TTFont("AppFont",      local_n))
+            pdfmetrics.registerFont(TTFont("AppFont-Bold", local_b))
+            return "AppFont","AppFont-Bold"
+        except: pass
+
+    # 3) Linux sistem fontları
+    for n, b in [
         ("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"),
         ("/usr/share/fonts/dejavu/DejaVuSans.ttf",
          "/usr/share/fonts/dejavu/DejaVuSans-Bold.ttf"),
-        ("/usr/share/fonts/truetype/freefont/FreeSans.ttf",
-         "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf"),
-    ]
-    for normal_path, bold_path in linux_candidates:
-        if os.path.exists(normal_path) and os.path.exists(bold_path):
+        ("/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+         "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"),
+    ]:
+        if os.path.exists(n) and os.path.exists(b):
             try:
-                pdfmetrics.registerFont(TTFont("AppFont",     normal_path))
-                pdfmetrics.registerFont(TTFont("AppFont-Bold",bold_path))
+                pdfmetrics.registerFont(TTFont("AppFont",      n))
+                pdfmetrics.registerFont(TTFont("AppFont-Bold", b))
                 return "AppFont","AppFont-Bold"
             except: pass
 
-    # 3) Fallback — Helvetica (Türkçe karakter desteklemez ama çalışır)
+    # 4) İnternetten indir (Streamlit Cloud)
+    try:
+        import urllib.request
+        font_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts")
+        os.makedirs(font_dir, exist_ok=True)
+        dn = os.path.join(font_dir, "DejaVuSans.ttf")
+        db = os.path.join(font_dir, "DejaVuSans-Bold.ttf")
+        base = "https://github.com/dejavu-fonts/dejavu-fonts/raw/master/ttf/"
+        if not os.path.exists(dn):
+            urllib.request.urlretrieve(base + "DejaVuSans.ttf",      dn)
+        if not os.path.exists(db):
+            urllib.request.urlretrieve(base + "DejaVuSans-Bold.ttf", db)
+        pdfmetrics.registerFont(TTFont("AppFont",      dn))
+        pdfmetrics.registerFont(TTFont("AppFont-Bold", db))
+        return "AppFont","AppFont-Bold"
+    except: pass
+
     return "Helvetica","Helvetica-Bold"
 
 FN, FB = _reg_fonts()

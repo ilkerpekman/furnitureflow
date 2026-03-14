@@ -36,15 +36,37 @@ st.set_page_config(page_title="FurnitureFlow", page_icon="🪑",
                    layout="wide", initial_sidebar_state="expanded")
 DB = "furnitureflow.db"
 
-# ── Font ──────────────────────────────────────────────────────────────────────
+# ── Font (Türkçe karakter desteği — Windows + Linux/Cloud) ───────────────────
 def _reg_fonts():
-    d = r"C:\Windows\Fonts"
-    try:
-        pdfmetrics.registerFont(TTFont("Arial",      os.path.join(d,"arial.ttf")))
-        pdfmetrics.registerFont(TTFont("Arial-Bold", os.path.join(d,"arialbd.ttf")))
-        return "Arial","Arial-Bold"
-    except:
-        return "Helvetica","Helvetica-Bold"
+    # 1) Windows
+    win_dir = r"C:\Windows\Fonts"
+    if os.path.exists(os.path.join(win_dir, "arial.ttf")):
+        try:
+            pdfmetrics.registerFont(TTFont("Arial",      os.path.join(win_dir,"arial.ttf")))
+            pdfmetrics.registerFont(TTFont("Arial-Bold", os.path.join(win_dir,"arialbd.ttf")))
+            return "Arial","Arial-Bold"
+        except: pass
+
+    # 2) Linux/Streamlit Cloud — DejaVu (Ubuntu'da varsayılan olarak kurulu)
+    linux_candidates = [
+        ("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"),
+        ("/usr/share/fonts/dejavu/DejaVuSans.ttf",
+         "/usr/share/fonts/dejavu/DejaVuSans-Bold.ttf"),
+        ("/usr/share/fonts/truetype/freefont/FreeSans.ttf",
+         "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf"),
+    ]
+    for normal_path, bold_path in linux_candidates:
+        if os.path.exists(normal_path) and os.path.exists(bold_path):
+            try:
+                pdfmetrics.registerFont(TTFont("AppFont",     normal_path))
+                pdfmetrics.registerFont(TTFont("AppFont-Bold",bold_path))
+                return "AppFont","AppFont-Bold"
+            except: pass
+
+    # 3) Fallback — Helvetica (Türkçe karakter desteklemez ama çalışır)
+    return "Helvetica","Helvetica-Bold"
+
 FN, FB = _reg_fonts()
 
 # ── DB helpers ─────────────────────────────────────────────────────────────────
@@ -1919,8 +1941,27 @@ elif page=="📦 Stok Durumu":
     # Overall readiness bar
     ready = s_map.get("available",0)
     if total_p > 0:
-        st.progress(ready/total_p,
-                    text=f"Stok Hazırlığı: {ready}/{total_p} parça depoda (%{int(ready/total_p*100)})")
+        pct_ready = int(ready/total_p*100) if total_p else 0
+        st.markdown(f"""
+        <div style='background:#161622;border-radius:12px;padding:.9rem 1.1rem;
+                    margin:.5rem 0;border:1px solid #1e1e30'>
+          <div style='display:flex;justify-content:space-between;
+                      align-items:center;margin-bottom:.5rem;flex-wrap:wrap;gap:.3rem'>
+            <span style='font-size:.9rem;font-weight:600;color:#e2e2ee'>
+              📦 Stok Hazırlığı
+            </span>
+            <span style='font-size:.9rem;font-weight:700;
+                         color:{"#22c55e" if pct_ready==100 else "#a89bff"}'>
+              {ready} / {total_p} parça depoda &nbsp;·&nbsp; %{pct_ready}
+            </span>
+          </div>
+          <div style='background:#1e1e30;border-radius:999px;height:10px;overflow:hidden'>
+            <div style='height:10px;border-radius:999px;width:{pct_ready}%;
+                        background:{"#22c55e" if pct_ready==100 else "linear-gradient(90deg,#7c6dff,#a89bff)"};
+                        transition:width .4s'></div>
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     st.divider()
 

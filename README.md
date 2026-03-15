@@ -1,183 +1,94 @@
-# furnitureflow
+![FurnitureFlow](banner.png)
 
-FurnitureFlow
-Logistics Integrity & Loading Workflow System
+# FurnitureFlow
+**Lojistik Sipariş ve Depo Yönetim Sistemi**
 
-FurnitureFlow, mobilya sevkiyat operasyonlarında insan hafızasına dayalı süreçleri dijitalleştirmek amacıyla geliştirilmiş bir lojistik karar destek sistemidir.
+🔗 [Canlı Demo](https://furnitureflow.streamlit.app) &nbsp;|&nbsp; Geliştirici: [İlker Pekman](https://github.com/ilkerpekman)
 
-Bu proje, Luxe Life Mobilya’daki saha deneyiminden doğan gerçek bir operasyonel problemi çözmek için tasarlanmıştır.
+---
 
+## Problem
 
---- Problem ---
+Luxe Life Mobilya lojistik departmanında gözlemlediğim süreç problemleri:
 
-Mobilya sevkiyat operasyonlarında tek bir koleksiyon onlarca farklı parçadan oluşabilir.
+- Tüm sevkiyat süreçleri **kağıt formlar** ve **personel hafızasına** dayanıyordu
+- Tek bir koleksiyon onlarca farklı parçadan oluşuyor; doğru **yükleme sırası** kritik önem taşıyor
+- Yeni bir personelin tüm koleksiyonları ve yükleme sırasını öğrenmesi **yaklaşık 1 ay** sürüyordu
+- Eksik parça sevkiyatları ve yanlış istifleme sık yaşanan operasyonel kayıplardı
 
-Örneğin:
+Fabrikanın kurumsal hafızası çalışanların zihnindeydi.
 
-Massimo Koleksiyonu
+---
 
-Sideboard
-
-Mirror Block
-
-TV Unit
-
-Shelf Modules
-
-Leg Sets
-
-Bu parçaların sadece doğru şekilde toplanması yetmez.
-
-Aynı zamanda:
-
-doğru sırayla yüklenmeleri
-
-palet dengesinin korunması
-
-kırılgan parçaların korunması
-
-gerekmektedir.
-
-Fakat sahadaki operasyon tamamen şu iki şeye dayanıyordu:
-
-• Kağıt sipariş formları
-• Personelin hafızası
-
-Yeni bir personelin bu bilgileri öğrenmesi yaklaşık 1 ay sürüyordu.
-
-Bu durum şu problemlere yol açıyordu:
-
-eksik parça sevkiyatları
-
-yanlış yükleme sırası
-
-ürün hasarları
-
-operasyonel yavaşlık
-
-Kısacası fabrikanın kurumsal hafızası çalışanların zihnindeydi.
-
-
---- Solution ---
+## Çözüm
 
 FurnitureFlow bu kurumsal hafızayı dijital bir sisteme aktarmak için geliştirildi.
 
-Sistem üç temel prensip üzerine kuruldu:
+> Luxe Life Mobilya lojistik departmanında tespit ettiğim manuel süreç problemlerini ortadan kaldırmak için sıralı tik atma mekanizması, bütünlük kontrolü, uzman tanımlı yükleme sırası, gerçek zamanlı SLA takibi ve rol tabanlı erişim kontrolünü birleştiren bir karar destek sistemi geliştirdim.
 
-1. Knowledge Digitization
+---
 
-Mobilya koleksiyonlarına ait tüm parçalar ve teknik ölçüler veritabanında modellenir.
+## Özellikler
 
-2. Sequential Loading Logic
+| Özellik | Açıklama |
+|---|---|
+| ✅ **Bütünlük Kontrolü** | Tüm parçalar doğrulanmadan sevkiyat tamamlanamaz |
+| 📋 **Uzman Tanımlı Yükleme Sırası** | Her koleksiyon için optimize edilmiş sıralama |
+| ⏱ **Gerçek Zamanlı SLA Takibi** | Kritik siparişler için süre uyarı sistemi |
+| 🔑 **Rol Tabanlı Erişim** | Admin / Yönetici / Personel yetki seviyeleri |
+| 📄 **Otomatik Çeki Listesi** | PDF ve Excel formatında sevkiyat belgesi |
+| 🔔 **Bildirim Sistemi** | Anlık operasyonel uyarılar |
+| 📜 **Denetim Kaydı** | Tüm işlemlerin tam izlenebilir kaydı |
+| 📊 **Analitik Dashboard** | Personel performansı ve SLA raporları |
 
-Sistem, personelin parçaları doğru sırayla yüklemesini zorunlu kılar.
+---
 
-3. Integrity Check
+## Teknoloji
 
-Tüm parçalar doğrulanmadan sevkiyat tamamlanamaz.
+```
+Python · Streamlit · SQLite · ReportLab · Pandas · openpyxl
+```
 
-Böylece:
+---
 
-1 aylık ezber süreci
-→ saniyeler süren dijital doğrulamaya dönüşür.
+## Kurulum
 
+```bash
+git clone https://github.com/ilkerpekman/furnitureflow
+cd furnitureflow
+pip install -r requirements.txt
+python init_db.py
+python generate_sample_data.py
+streamlit run app.py
+```
 
---- Key Features ---
-Integrity Check System
+## Demo Hesapları
 
-Sevkiyat tamamlanmadan önce tüm parçalar doğrulanır.
+| Rol | Kullanıcı | Şifre |
+|---|---|---|
+| 🔑 Admin | `admin` | `admin123` |
+| 📋 Yönetici | `yonetici` | `yonetici123` |
+| 👷 Personel | `personel` | `personel123` |
 
-Eksik parça varsa sistem sevkiyatı durdurur.
+---
 
+## Sistem İş Akışı
 
---- Sequential Loading Workflow ---
-
-Parçaların palet üzerine stratejik yükleme sırası dijital olarak yönetilir.
-
-Bu sayede:
-
-palet dengesi korunur
-
-ürün hasar riski azalır
-
-operasyon hızlanır
-
-
---- Technical Dimension Modeling ---
-
-Her parça için teknik ölçüler sisteme kaydedilir.
-
-Bu sayede sistem:
-
-yükleme sırasını optimize eder
-
-operasyonel hataları azaltır
-
-
---- Operational Memory Digitization ---
-
-Sahada çalışan personelin yıllar içinde edindiği operasyonel bilgi sistematik hale getirilmiştir.
-
-FurnitureFlow’un temel amacı:
-
-insan hafızasını operasyonel bir yazılım sistemine dönüştürmektir.
-
-
---- Tech Stack ---
-
-Python
-Streamlit
-SQLite
-SQLAlchemy
-
-
---- System Workflow ---
-
-Sipariş oluşturulur
-
-↓
-
+```
+Sipariş Oluşturulur
+        ↓
 Sistem koleksiyona ait parçaları getirir
+        ↓
+Personel parçaları sırayla tik atarak doğrular
+        ↓
+Bütünlük Kontrolü (Integrity Check) çalışır
+        ↓
+Tüm parçalar onaylanırsa → Çeki Listesi üretilir
+        ↓
+Sevkiyat tamamlanır
+```
 
-↓
+---
 
-Personel parçaları sırayla doğrular
+*Luxe Life Mobilya lojistik departmanında gözlemlenen gerçek operasyonel problemlerden doğdu.*
 
-↓
-
-Integrity Check çalışır
-
-↓
-
-Tüm parçalar doğrulanırsa sevkiyat tamamlanır
-
-
---- Real World Impact ---
-
-FurnitureFlow aşağıdaki operasyonel kazanımları hedefler:
-
-sevkiyat hatalarının azaltılması
-
-yeni personelin adaptasyon süresinin kısalması
-
-operasyonel hızın artması
-
-kağıt tabanlı süreçlerin dijitalleşmesi
-
-
---- Future Improvements ---
-
-barcode / QR scanning integration
-
-warehouse performance analytics
-
-shipment time SLA tracking
-
-packing volume optimization
-
---- Author ---
-
-İlker Pekman
-Management Information Systems Student
-
-Focused on building systems that bridge real-world operations and digital solutions.

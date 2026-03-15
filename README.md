@@ -1,7 +1,7 @@
 ![FurnitureFlow](banner.png)
 
 # FurnitureFlow
-**Lojistik Sipariş ve Depo Yönetim Sistemi**
+**Akıllı Sevkiyat ve Operasyonel Karar Destek Sistemi**
 
 🔗 [Canlı Demo](https://furnitureflow.streamlit.app) &nbsp;|&nbsp; Geliştirici: [İlker Pekman](https://github.com/ilkerpekman)
 

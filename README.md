@@ -7,7 +7,8 @@ FurnitureFlow, mobilya sevkiyat operasyonlarında insan hafızasına dayalı sü
 
 Bu proje, Luxe Life Mobilya’daki saha deneyiminden doğan gerçek bir operasyonel problemi çözmek için tasarlanmıştır.
 
-Problem
+
+--- Problem ---
 
 Mobilya sevkiyat operasyonlarında tek bir koleksiyon onlarca farklı parçadan oluşabilir.
 
@@ -56,7 +57,8 @@ operasyonel yavaşlık
 
 Kısacası fabrikanın kurumsal hafızası çalışanların zihnindeydi.
 
-Solution
+
+--- Solution ---
 
 FurnitureFlow bu kurumsal hafızayı dijital bir sisteme aktarmak için geliştirildi.
 
@@ -79,14 +81,16 @@ Böylece:
 1 aylık ezber süreci
 → saniyeler süren dijital doğrulamaya dönüşür.
 
-Key Features
+
+--- Key Features ---
 Integrity Check System
 
 Sevkiyat tamamlanmadan önce tüm parçalar doğrulanır.
 
 Eksik parça varsa sistem sevkiyatı durdurur.
 
-Sequential Loading Workflow
+
+--- Sequential Loading Workflow ---
 
 Parçaların palet üzerine stratejik yükleme sırası dijital olarak yönetilir.
 
@@ -98,7 +102,8 @@ palet dengesi korunur
 
 operasyon hızlanır
 
-Technical Dimension Modeling
+
+--- Technical Dimension Modeling ---
 
 Her parça için teknik ölçüler sisteme kaydedilir.
 
@@ -108,7 +113,8 @@ yükleme sırasını optimize eder
 
 operasyonel hataları azaltır
 
-Operational Memory Digitization
+
+--- Operational Memory Digitization ---
 
 Sahada çalışan personelin yıllar içinde edindiği operasyonel bilgi sistematik hale getirilmiştir.
 
@@ -116,14 +122,16 @@ FurnitureFlow’un temel amacı:
 
 insan hafızasını operasyonel bir yazılım sistemine dönüştürmektir.
 
-Tech Stack
+
+--- Tech Stack ---
 
 Python
 Streamlit
 SQLite
 SQLAlchemy
 
-System Workflow
+
+--- System Workflow ---
 
 Sipariş oluşturulur
 
@@ -143,7 +151,8 @@ Integrity Check çalışır
 
 Tüm parçalar doğrulanırsa sevkiyat tamamlanır
 
-Real World Impact
+
+--- Real World Impact ---
 
 FurnitureFlow aşağıdaki operasyonel kazanımları hedefler:
 
@@ -155,7 +164,8 @@ operasyonel hızın artması
 
 kağıt tabanlı süreçlerin dijitalleşmesi
 
-Future Improvements
+
+--- Future Improvements ---
 
 barcode / QR scanning integration
 
@@ -165,9 +175,13 @@ shipment time SLA tracking
 
 packing volume optimization
 
-Author
+--- Author ---
 
 İlker Pekman
 Management Information Systems Student
+
+Focused on building systems that bridge real-world operations and digital solutions.
+
+
 
 Focused on building systems that bridge real-world operations and digital solutions.

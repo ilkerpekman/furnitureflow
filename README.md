@@ -181,7 +181,3 @@ packing volume optimization
 Management Information Systems Student
 
 Focused on building systems that bridge real-world operations and digital solutions.
-
-
-
-Focused on building systems that bridge real-world operations and digital solutions.
